@@ -16,8 +16,10 @@ const LoginPage = () => {
         else {
             message.success(data?.message || 'Login Successful')
             // Store user token or data in localStorage or context
-            if (data?.token) {
-                localStorage.setItem('token', data.token);
+            console.log("Response data :", data);
+
+            if (data.data?.token) {
+                localStorage.setItem('token', data.data.token);
             }
             navigate("/dashboard")
         }
