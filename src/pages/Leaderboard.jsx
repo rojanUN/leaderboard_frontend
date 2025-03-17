@@ -19,7 +19,7 @@ const LeaderboardPage = () => {
     if (gameId) {
       fetchLeaderboard(pageNo);
     }
-  }, [gameId, pageNo, token]);
+  }, [gameId, pageNo]);
 
   useEffect(() => {
     const socket = new SockJS('http://localhost:8080/ws');
@@ -31,7 +31,7 @@ const LeaderboardPage = () => {
       },
       onConnect: () => {
         console.log('Connected to WebSocket');
-        stompClient.subscribe(`/topic/leaderboard/${gameId}`, (message) => {
+        stompClient.subscribe(`/topic/leaderboard`, (message) => {
           const updatedScore = JSON.parse(message.body);
           setLeaderboard((prevLeaderboard) => {
             const updatedLeaderboard = prevLeaderboard.map((entry) =>
